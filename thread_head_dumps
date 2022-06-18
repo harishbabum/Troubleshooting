@@ -1,0 +1,14 @@
+Generating thread dumps on linux:-
+1. Identify the java process that Drillbits is running in. 
+ps -ef | grep drill
+	Note: In worst you won't see any pid for drill because if its already dead. So, cat /opt/mapr/pid/drillbit.pid this file you will get pid. 
+	
+2. jstack -l JAVA_PID > jstack.out
+3. kill -3 JAVA_PID
+	Note: This won't kill your sever.
+
+4. With -heap to see the java heap summary:
+jmap -heap <pid>  >> heapdump.out
+
+5. With -dump to dump the full java heap:
+jmap -dump:file=heapdump.dump 912 
